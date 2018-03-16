@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <button [routerLink]="['/home']">Home</button>
+  <router-outlet></router-outlet> 
+  <h4>Edit this Author</h4>
+  <div *ngIf='author'>
+    <h3 *ngIf='error'>{{error}}</h3>
+    <form (submit)='editAuthor(author)'>
+      Name: <input type="text" name="name" [(ngModel)]="author.name">
+      <button [routerLink]="['/home']">Home</button>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
