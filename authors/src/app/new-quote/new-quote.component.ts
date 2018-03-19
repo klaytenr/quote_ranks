@@ -3,18 +3,20 @@ import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  selector: 'app-new-quote',
+  templateUrl: './new-quote.component.html',
+  styleUrls: ['./new-quote.component.css']
 })
-export class EditComponent implements OnInit {
-  author: object;
+export class NewQuoteComponent implements OnInit {
+  author: any;
+  newQuote: any;
   error: any;
   constructor(private _httpService: HttpService,
     private _route: ActivatedRoute,
     private _router: Router) { }
 
   ngOnInit() {
+    this.newQuote = { name: '', votes: 0};
     this._route.params.subscribe((params: Params) => this.getAuthor(params['id']));
   }
   getAuthor(id){
@@ -24,20 +26,20 @@ export class EditComponent implements OnInit {
     })
     console.log(this.author);
   }
-  editAuthor(author){
-    var editedAuthor = this._httpService.editOne(author);
-    editedAuthor.subscribe((data:any) => {
+  addNewQuote(){
+    var newQuote = this._httpService.createQuote(this.newQuote, this.author._id);
+    newQuote.subscribe((data: any) =>{
       if(data.error){
-        this.error = data.error;
+        this.error = data.error.errors.name.message;
         console.log(data.error);
       }else{
         console.log(data);
-        this.author = data.author;
+        this.newQuote = { name: '', votes: 0};
         this.goHome();
       }
     })
   }
   goHome(){
-    this._router.navigate(['/home']);
+    this._router.navigate(['/quotes/', this.author._id]);
   }
 }

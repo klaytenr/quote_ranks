@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <button [routerLink]="['/home']">Home</button>
+  <router-outlet></router-outlet> 
+
+  <div *ngIf='author'>
+    <h4>Add a new Quote for {{author.name}}</h4>
+    <div>
+      <h3 *ngIf='error'>{{error}}</h3>
+      <form (submit)='addNewQuote(author._id)'>
+        {{ newAuthor | json }}
+        Quote: <input type="text" name="name" [(ngModel)]="newQuote.quote">
+        <input type="submit" value="Submit">
+      </form>
+      <button [routerLink]="['/home']">Home</button>
+    </div>
+  </div>
+</div>

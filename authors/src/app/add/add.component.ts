@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  title = 'Favorite Authors';
   authors = [];
   author: object;
   newAuthor: object;
@@ -16,7 +15,7 @@ export class AddComponent implements OnInit {
   constructor(private _httpService: HttpService, private _router: Router) { }
 
   ngOnInit() {
-    this.newAuthor = { name: ''};
+    this.newAuthor = { name: '', quotes: []};
   }
   addNewAuthor(){
     var editAuthor = this._httpService.createAuthor(this.newAuthor);
@@ -27,7 +26,7 @@ export class AddComponent implements OnInit {
       }else{
         console.log(data);
         this.authors.push(data);
-        this.newAuthor = { name: ''};
+        this.newAuthor = { name: '', quotes: []};
         this.goHome();
       }
     })

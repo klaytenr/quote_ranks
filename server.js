@@ -10,6 +10,7 @@ app.use(express.static(__dirname + '/authors/dist'));
 var Schema = mongoose.Schema;
 var AuthorSchema = new mongoose.Schema({
     name: {type: String, required: true, minlength: 3},
+    quotes: {type: Array, required: true, default: []},
 }, {timestamps: true});
 var Author = mongoose.model('Author', AuthorSchema);
 mongoose.Promise = global.Promise;
@@ -61,6 +62,29 @@ app.put('/edit/:id', function(req, res) {
             author.name = req.body.name;
             author.save();
             res.json({message:'Update Successful', author: author});
+        }
+    })
+})
+app.post('/new-quote/:id', function(req, res){
+    Author.findOne({_id:req.params.id}, function(err, author){
+        console.log(req.body);
+        if(req.body.quote.length < 3){
+            res.json({message:"Error", error:'Path `name` (' + req.body.name + ') is shorter than the minimum allowed length (3).'});
+        }else{
+            author.quotes.push({quote: req.body.quote, votes: 0}); 
+            author.save();
+            res.json({message:'Update Successful', author: author});
+        }
+    })
+})
+app.post('/updating/:id', function(req, res){
+    Author.findOne({_id: req.params.id}, function(err, author){
+        if(err){
+            res.json({message:"error"});
+        }else{
+            author.set({name: req.body.author.name, quotes: req.body.author.quotes});
+            author.save();
+            res.json({message:'updated', data: author});
         }
     })
 })

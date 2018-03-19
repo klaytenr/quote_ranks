@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { AddComponent } from './add/add.component';
 import { HomeComponent } from './home/home.component';
+import { QuotesComponent } from './quotes/quotes.component';
+import { NewQuoteComponent } from './new-quote/new-quote.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     EditComponent,
     AddComponent,
-    HomeComponent
+    HomeComponent,
+    QuotesComponent,
+    NewQuoteComponent
   ],
   imports: [
     BrowserModule,

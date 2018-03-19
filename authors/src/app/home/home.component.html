@@ -1,8 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
   <button [routerLink]="['/add']">Add an Author</button>
   <router-outlet></router-outlet> 
   <table>
@@ -15,7 +12,7 @@
     <tbody *ngFor='let author of authors'>
       <tr>
         <td>{{author.name}}</td>
-        <td><button [routerLink]="['/edit/', author._id]">Edit</button> <button (click)='deleteAuthor(author._id)'>Delete</button></td>
+        <td><button [routerLink]="['/quotes/', author._id]">View Quotes</button> <button [routerLink]="['/edit/', author._id]">Edit</button> <button (click)='deleteAuthor(author._id)'>Delete</button></td>
       </tr>
     </tbody>
   </table>

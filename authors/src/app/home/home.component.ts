@@ -7,7 +7,6 @@ import { HttpService } from '../http.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  title = 'Favorite Authors';
   authors = [];
   constructor(private _httpService: HttpService) { }
 

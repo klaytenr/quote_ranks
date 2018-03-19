@@ -19,4 +19,10 @@ export class HttpService {
   editOne(author){
     return this._http.put('/edit/'+author._id, author)
   }
+  createQuote(quote, id){
+    return this._http.post('/new-quote/'+id, quote);
+  }
+  update(author){
+    return this._http.post('/updating/' + author._id, {author: author});
+  }
 }
